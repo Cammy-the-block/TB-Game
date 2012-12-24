@@ -15,6 +15,7 @@ public class TB_Game {
 		
 		String whatToDo;
 		Scanner scannerS = new Scanner(System.in);
+		System.out.println("Hello this is a test");
 		System.out.print("Welcome to the TextBased Game! " + "\n" + "\n"
 				+ "Which game do you wish to play?" + "\n" + "1 - Gangup"
 				+ "\n" + "2 - Black Jack - Coming Soon");
