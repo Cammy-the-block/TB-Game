@@ -11,7 +11,6 @@ public class gangup {
 		board = clearGangupBoard(board);
 		gangupTurn(board, playerNumber);
 	}
-
 	public static int[][] clearGangupBoard(int[][] board) {
 
 		for (int x = 0; x <= 7; x++) {
@@ -21,7 +20,6 @@ public class gangup {
 		}
 		return board;
 	}
-
 	public static void printGangupBoard(int[][] board) {
 
 		for (int x = 7; x >= 0; x--) {
@@ -33,8 +31,8 @@ public class gangup {
 		}
 		System.out.print("\n" + "  0 1 2 3 4 5 6 7");
 	}
-
 	public static void gangupTurn(int[][] board, int playerNumber) {
+		
 		System.out.print("\n" + "Player #" + playerNumber);
 		printGangupBoard(board);
 		Scanner scannerInt = new Scanner(System.in);
@@ -44,13 +42,14 @@ public class gangup {
 		int inputY = scannerInt.nextInt();
 		if ((inputX < 8 && inputX >= 0) && (inputY < 8 && inputY >= 0)){
 			if (board[inputY][inputX]== 0){
+				
 				board[inputY][inputX] = playerNumber;
 				boolean win = checkForWin();
-				if (win == true){
-					
+				if (win == true){					
 				}
 				else{
 					if (playerNumber < 4){
+						
 						playerNumber++;
 						gangupTurn(board, playerNumber);
 					}
@@ -63,17 +62,14 @@ public class gangup {
 		else{
 			invalidMove(board, playerNumber);
 		}
-
 	}
 	private static void invalidMove(int[][] board, int playerNumber) {
+		
 		System.out.print("Invalid Move");
 		gangupTurn(board, playerNumber);
-		
 	}
-
 	public static boolean checkForWin(){
+		
 		return false;
 	}
-	
-
 }

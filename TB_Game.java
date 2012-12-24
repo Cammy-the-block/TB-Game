@@ -1,4 +1,5 @@
 package TB_Game;
+
 import java.util.Scanner;
 
 public class TB_Game {
@@ -9,10 +10,9 @@ public class TB_Game {
 				|| whatToDo.equalsIgnoreCase("1")) {
 			gangup.startGangup();
 		}
-
 	}
-
 	public static String menu() {
+		
 		String whatToDo;
 		Scanner scannerS = new Scanner(System.in);
 		System.out.print("Welcome to the TextBased Game! " + "\n" + "\n"
@@ -22,5 +22,4 @@ public class TB_Game {
 		whatToDo = scannerS.nextLine();
 		return whatToDo;
 	}
-	
 }
