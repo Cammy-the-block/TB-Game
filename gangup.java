@@ -36,9 +36,8 @@ public class gangup {
 		System.out.print("\n" + "Player #" + playerNumber);
 		printGangupBoard(board);
 		Scanner scannerInt = new Scanner(System.in);
-		System.out.print("\n" + "Where do you want to go?" + "\n" + "X:");
+		System.out.print("\n" + "Where do you want to go?" + "\n" + "X Y:");
 		int inputX = scannerInt.nextInt();
-		System.out.print("Y:");
 		int inputY = scannerInt.nextInt();
 		if ((inputX < 8 && inputX >= 0) && (inputY < 8 && inputY >= 0)){
 			if (board[inputY][inputX]== 0){
@@ -51,6 +50,10 @@ public class gangup {
 					if (playerNumber < 4){
 						
 						playerNumber++;
+						gangupTurn(board, playerNumber);
+					}
+					else {
+						playerNumber = 1;
 						gangupTurn(board, playerNumber);
 					}
 				}
