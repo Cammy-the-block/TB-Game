@@ -20,6 +20,7 @@ public class cryption {
 			inputArray = shiftArray(inputArray);
 		}
 		System.out.println("Encrypted version:" + new String(inputArray));
+		TB_Game.menu();
 	}
 
 	public static byte[] reverseArray(byte[] array) {
@@ -42,13 +43,14 @@ public class cryption {
 		shift = (int) (shift + 0);
 		return array;
 	}
-	public static void decrypt(){
+
+	public static void decrypt() {
 		String afterShiftOne = "";
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("What do you wish to decrypt?");
 		byte[] inputArray = scanner.nextLine().getBytes();
 		System.out.println("How far do you wish to deshift it?");
-		shift =  0 - scanner.nextInt();
+		shift = 0 - scanner.nextInt();
 		System.out.println("How many layers deep do you wish to decrypt?");
 		int layersDeep = scanner.nextInt();
 		// shift = shift - layersDeep * inputArray.length + layersDeep;
@@ -57,8 +59,10 @@ public class cryption {
 			inputArray = deshiftArray(inputArray);
 		}
 		System.out.println("Decrypted version:" + new String(inputArray));
+		TB_Game.menu();
 	}
-	public static byte[] deshiftArray(byte[] array){
+
+	public static byte[] deshiftArray(byte[] array) {
 		shift = (int) (shift + 0);
 		byte tempByteStorage;
 		for (int x = 0; array.length > x; x++) {
@@ -66,6 +70,6 @@ public class cryption {
 			shift = (int) (shift + 0);
 			array[x] = tempByteStorage;
 		}
-		return array;	
+		return array;
 	}
 }
