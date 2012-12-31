@@ -36,10 +36,10 @@ public class cryption {
 		byte tempByteStorage;
 		for (int x = 0; array.length > x; x++) {
 			tempByteStorage = (byte) (array[x] + shift);
-			shift = (int) (shift + 1);
+			shift = (int) (shift + 0);
 			array[x] = tempByteStorage;
 		}
-		shift = (int) (shift + 1);
+		shift = (int) (shift + 0);
 		return array;
 	}
 	public static void decrypt(){
@@ -51,19 +51,19 @@ public class cryption {
 		shift =  0 - scanner.nextInt();
 		System.out.println("How many layers deep do you wish to decrypt?");
 		int layersDeep = scanner.nextInt();
-		shift = shift + inputArray.length * layersDeep + layersDeep;
+		// shift = shift - layersDeep * inputArray.length + layersDeep;
 		for (int x = 0; layersDeep > x; x++) {
-			inputArray = deshiftArray(inputArray);
 			inputArray = reverseArray(inputArray);
+			inputArray = deshiftArray(inputArray);
 		}
 		System.out.println("Decrypted version:" + new String(inputArray));
 	}
 	public static byte[] deshiftArray(byte[] array){
+		shift = (int) (shift + 0);
 		byte tempByteStorage;
-		shift = (int) (shift + 1);
 		for (int x = 0; array.length > x; x++) {
 			tempByteStorage = (byte) (array[x] + shift);
-			shift = (int) (shift + 1);
+			shift = (int) (shift + 0);
 			array[x] = tempByteStorage;
 		}
 		return array;	

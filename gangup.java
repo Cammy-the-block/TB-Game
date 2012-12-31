@@ -66,7 +66,7 @@ public class gangup {
 			invalidMove(board, playerNumber);
 		}
 	}
-	private static void invalidMove(int[][] board, int playerNumber) {
+	public static void invalidMove(int[][] board, int playerNumber) {
 		
 		System.out.print("Invalid Move");
 		gangupTurn(board, playerNumber);
