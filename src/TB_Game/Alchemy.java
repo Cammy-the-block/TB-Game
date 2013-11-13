@@ -2,12 +2,14 @@ package TB_Game;
 
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class Alchemy {
 	
 	
 	static boolean game = true;
-	static int totalElements= 17;
-	static int totalStartingElements = 4;
+	static int totalElements;
+	static int totalStartingElements;
 	//public static String elementArray[][]=
 	      //   Time       Earth     Water       Air          Fire 	    Rock     Rust     Tarnish       Heat     Mud             Tornado        Lava	
 /* Time  *///{{"error",   "Rock",    "Rust",     "Tarnish",   "Heat",   "error", "error", "Weathering", "Marble", "Muddy Slope", "Flying Rock", "error"}, 
@@ -21,11 +23,11 @@ public class Alchemy {
 	public static String elementStringArray[]; //This array stores each element in order. Used to 
 	//find element's int and string.
 
-	public static int elementsDiscovered[]= new int[totalElements]; // Stores the elements the
+	public static int elementsDiscovered[]; // Stores the elements the
 	//player has discovered. During setUpArrays it gets filled with starting elements and nothing
 	
 	public static void startAlchemy() {	
-		setUpArrays(); 
+		setUpVars(); 
 		System.out.print("\n" + "Welcome to Alchemy!" + "\n" + "\n");
 		System.out.println("Instructions: To start, input the "
 				+ "first element that you would like to"
@@ -59,7 +61,7 @@ public class Alchemy {
 		}
 	}
 	
-	public static void setUpArrays(){
+	public static void setUpVars(){
 		TextFileToArray tfta = new TextFileToArray(); //Creates new object used to import data
 		tfta.openFile("Elements.txt"); //opens Elements.txt
 		tfta.readFile(); //reads the file
@@ -68,6 +70,9 @@ public class Alchemy {
 		//file earlier
 		elementStringArray= tfta.returnElementStringArray(); // populates elementStringArray from data
 		//import form file earlier
+		totalElements = tfta.returnTotalElements();
+		totalStartingElements = tfta.returnTotalStartingElements();
+		elementsDiscovered = new int[totalElements];
 		fillArray(elementsDiscovered, totalStartingElements); //calls fillArray which populates 
 		//elementsDiscovered with  starting elements then fills the rest with -1 to represent nothing
 	}
