@@ -32,7 +32,10 @@ public class TB_Game {
 		whatToDo = whatToDo.trim();
 		
 		whatToDo = WordUtils.capitalize(whatToDo);
-        switch (whatToDo.toUpperCase()){
+		System.out.println(whatToDo);
+		whatToDo = whatToDo.toUpperCase();
+		System.out.println(whatToDo);
+        switch (whatToDo){
         	case "Gangup":
         	case "1":
         		gangup.startGangup();
