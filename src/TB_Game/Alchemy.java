@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import utils.TextFileToArray;
+
 public class Alchemy {
 	
 	
