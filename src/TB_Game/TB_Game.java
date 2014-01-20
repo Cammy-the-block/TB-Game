@@ -29,12 +29,13 @@ public class TB_Game {
 						+ "5 - Decryption Gui \n"
 						+ "7 - Alchemy - Work In Progress \n"
 						+ "8 - Exit");
+		
 		if (whatToDo == null) {
 			exit();
 		}
 		whatToDo = whatToDo.trim();
-		
 		whatToDo = Capitalize.capitalizeEveryWord(whatToDo);
+		
         switch (whatToDo){
         	case "Gangup":
         	case "1":
