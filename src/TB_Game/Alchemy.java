@@ -112,7 +112,7 @@ public class Alchemy {
 		if (!checkValid(element)) { //calls checkValid to check if the element is valid if it isn't it
 			System.out.println(""); //prints out some text then restarts game loop
 			System.out.println("That is an element that"
-					+ "either does not exist or that you"
+					+ " does not exist or that you"
 					+ " have not yet obtained.");
 			System.out.println("");
 			System.out.println("Please try again.");
