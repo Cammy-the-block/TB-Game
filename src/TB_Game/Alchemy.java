@@ -16,8 +16,8 @@ public class Alchemy {
 	      //   Time       Earth     Water       Air          Fire 	    Rock     Rust     Tarnish       Heat     Mud             Tornado        Lava	
 /* Time  *///{{"error",   "Rock",    "Rust",     "Tarnish",   "Heat",   "error", "error", "Weathering", "Marble", "Muddy Slope", "Flying Rock", "error"}, 
 /* Earth *///{"Rock",    "error",   "Mud",      "Tornado",   "Lava",   "Rock",  "error", "Crumbles",   "error",  "error",       "error",       "error" },
-/* Water *///  {"Rust",    "Rock",    "error",    "Huricane",  "Steam",  "Pool",  "error", "error",      "Steam",  "Mud",         "Water Spout", "Obsidian"},
-/* Air *///    {"Tarnish", "Tornado", "Huricane", "error",     "Embers", "error", "error", "error",      "Embers", "error",       "Tornado",     "Heat"},
+/* Water *///  {"Rust",    "Rock",    "error",    "Hurricane",  "Steam",  "Pool",  "error", "error",      "Steam",  "Mud",         "Water Spout", "Obsidian"},
+/* Air *///    {"Tarnish", "Tornado", "Hurricane", "error",     "Embers", "error", "error", "error",      "Embers", "error",       "Tornado",     "Heat"},
 /* fire*/ //   {"Heat",    "Lava",    "Steam",    "Embers",    "error"}};
 	
 	public static String elementArray[][]; //This array stores all of the elements and how they are 
@@ -146,7 +146,7 @@ public class Alchemy {
 			return -1; //Java wants me to put a return
 		}
 		else{
-			int elementNumber = elementNumber(elementString); //if actualy element is in the location
+			int elementNumber = elementNumber(elementString); //if actually element is in the location
 			return elementNumber; //the ints map then it returns that element
 		}
 	}
