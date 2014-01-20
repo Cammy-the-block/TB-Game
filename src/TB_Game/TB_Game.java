@@ -4,7 +4,11 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import org.apache.commons.lang3.text.WordUtils;
+import utils.Capitalize;
+
+
+
+
 
 public class TB_Game {
 
@@ -15,23 +19,22 @@ public class TB_Game {
 	public static void menu() {
 
 		String whatToDo = JOptionPane
-				.showInputDialog("Welcome to the TextBased Game! " + "\n"
-						+ "\n" + "Which game do you wish to play?" + "\n"
-						+ "1 - Gangup - Work in Progress" + "\n"
-						+ "2 - Black Jack - Not Been Finished" + "\n"
-						+ "3 - Encryption - Non GUI" + "\n"
-						+ "4 - Decryption - Non GUI" + "\n"
-						+ "5 - Encryption GUI" + "\n" + "6 - Decryption GUI"
-						+ "\n" + "7 - Alchemy - Work In Progress" + "\n"
+				.showInputDialog(
+						"Welcome to the TextBased Game! \n"
+						+ "\n" + "Which game do you wish to play? \n"
+						+ "1 - Gangup - Work in Progress \n"
+						+ "2 - Encryption - Non GUI \n"
+						+ "3 - Decryption - Non GUI \n"
+						+ "4 - Encryption Gui \n" 
+						+ "5 - Decryption Gui \n"
+						+ "7 - Alchemy - Work In Progress \n"
 						+ "8 - Exit");
 		if (whatToDo == null) {
-			JOptionPane.showMessageDialog(null, "Invalid Option",
-					"Text Based Game", JOptionPane.PLAIN_MESSAGE);
-			menu();
+			exit();
 		}
 		whatToDo = whatToDo.trim();
 		
-		whatToDo = WordUtils.capitalize(whatToDo);
+		whatToDo = Capitalize.capitalizeEveryWord(whatToDo);
         switch (whatToDo){
         	case "Gangup":
         	case "1":
@@ -51,11 +54,11 @@ public class TB_Game {
         	case "4":
         		cryption.decrypt();
         		break;
-        	case "Encryption GUI":
+        	case "Encryption Gui":
         	case "5":
         		cryptionGUI.encrypt();
         		break;
-        	case "Decryption GUI":
+        	case "Decryption Gui":
         	case "6":
         		cryptionGUI.decrypt();
         	case "Alchemy":
