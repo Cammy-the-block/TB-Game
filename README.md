@@ -8,7 +8,9 @@ TB_Game also known as Text Based Game is a basic old school collection of text b
 * [Encryption and Decryption] (#crypt)
 * [Alchemy] (#alchemy)
  
-### <a name="framework"></a>Framework To Do List 
+## <a name="framework"></a>Framework 
+All stored in utils package and TB_Game.java
+### To Do List 
 * Change from displaying text on console to displaying in a new window.
 
 ## <a name="gangup"></a>Gangup
