@@ -27,8 +27,8 @@ public class TB_Game {
 						+ "3 - Decryption - Non GUI \n"
 						+ "4 - Encryption Gui \n" 
 						+ "5 - Decryption Gui \n"
-						+ "7 - Alchemy - Work In Progress \n"
-						+ "8 - Exit");
+						+ "6 - Alchemy - Work In Progress \n"
+						+ "7 - Exit");
 		
 		if (whatToDo == null) {
 			exit();
@@ -39,35 +39,29 @@ public class TB_Game {
         switch (whatToDo){
         	case "Gangup":
         	case "1":
-        		gangup.startGangup();
+        		Gangup.startGangup();
         		break;
-        	case "Black Jack":
-        	case "2":
-        		JOptionPane.showMessageDialog(null, "Black Jack has not been finished", "Text Based Game",
-    					JOptionPane.PLAIN_MESSAGE);
-    			menu();
-    			break;
         	case "Encryption":
-        	case "3":
+        	case "2":
         		cryption.encrypt();
         		break;
         	case "Decryption":
-        	case "4":
+        	case "3":
         		cryption.decrypt();
         		break;
         	case "Encryption Gui":
-        	case "5":
+        	case "4":
         		cryptionGUI.encrypt();
         		break;
         	case "Decryption Gui":
-        	case "6":
+        	case "5":
         		cryptionGUI.decrypt();
         	case "Alchemy":
-        	case "7":
+        	case "6":
         		Alchemy.startAlchemy();
         		break;
         	case "Exit":
-        	case "8":
+        	case "7":
         		exit();
         	default:
         		JOptionPane.showMessageDialog(null, "Invalid Option", "Text Based Game", JOptionPane.PLAIN_MESSAGE);
