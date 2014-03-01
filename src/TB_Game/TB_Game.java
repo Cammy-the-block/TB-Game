@@ -1,14 +1,10 @@
 package TB_Game;
 
-import java.util.Scanner;
+import gangup.Gangup;
 
 import javax.swing.JOptionPane;
 
 import utils.Capitalize;
-
-
-
-
 
 public class TB_Game {
 

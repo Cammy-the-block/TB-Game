@@ -1,4 +1,4 @@
-package utils;
+package gangup;
 
 public class GangupDataObject {
 

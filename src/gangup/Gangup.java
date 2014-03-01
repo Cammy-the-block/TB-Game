@@ -1,9 +1,6 @@
-package TB_Game;
+package gangup;
 
 import java.util.Scanner;
-
-import utils.GangupDataObject;
-
 
 public class Gangup {
 
