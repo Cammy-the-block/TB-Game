@@ -32,7 +32,6 @@ public class cryptionGUI implements ClipboardOwner {
 		JOptionPane.showMessageDialog(null, "Encrypted version:"
 				+ new String(inputArray), "TB Game", JOptionPane.PLAIN_MESSAGE);
 		cryptionGUI.setClipboardContents(new String(inputArray));
-		TB_Game.menu();
 	}
 
 	public static byte[] reverseArray(byte[] array) {
@@ -75,7 +74,6 @@ public class cryptionGUI implements ClipboardOwner {
 		JOptionPane.showMessageDialog(null, "Decrypted version:"
 				+ new String(inputArray), "TB Game", JOptionPane.PLAIN_MESSAGE);
 		cryptionGUI.setClipboardContents(new String(inputArray));
-		TB_Game.menu();
 	}
 
 	public static byte[] deshiftArray(byte[] array) {

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import utils.GuiMaster;
 import utils.TextFileToArray;
 
 public class Alchemy {
@@ -12,13 +13,6 @@ public class Alchemy {
 	static boolean continueGame = true;
 	static int totalElements;
 	static int totalStartingElements;
-	//public static String elementArray[][]=
-	//   Time       Earth     Water       Air          Fire 	    Rock     Rust     Tarnish       Heat     Mud             Tornado        Lava	
-	/* Time  *///{{"error",   "Rock",    "Rust",     "Tarnish",   "Heat",   "error", "error", "Weathering", "Marble", "Muddy Slope", "Flying Rock", "error"}, 
-	/* Earth *///{"Rock",    "error",   "Mud",      "Tornado",   "Lava",   "Rock",  "error", "Crumbles",   "error",  "error",       "error",       "error" },
-	/* Water *///  {"Rust",    "Rock",    "error",    "Hurricane",  "Steam",  "Pool",  "error", "error",      "Steam",  "Mud",         "Water Spout", "Obsidian"},
-	/* Air *///    {"Tarnish", "Tornado", "Hurricane", "error",     "Embers", "error", "error", "error",      "Embers", "error",       "Tornado",     "Heat"},
-	/* fire*/ //   {"Heat",    "Lava",    "Steam",    "Embers",    "error"}};
 
 	private static String elementArray[][]; //This array stores all of the elements and how they are 
 	//formed. Input by reading Elements.txt	
@@ -30,13 +24,12 @@ public class Alchemy {
 
 	public static void startAlchemy() {	
 		setUpVars(); 
-		System.out.print("\n" + "Welcome to Alchemy!" + "\n" + "\n");
-		System.out.println("Instructions: To start, input the "
+		GuiMaster.println("\n" + "Welcome to Alchemy!" + "\n" + "\n" 
+				+ "Instructions: To start, input the "
 				+ "first element that you would like to"
 				+ " mix and press \"Enter\" and then in the"
-				+ " same manner input the second element.");
-		System.out.print("\n" + "\n");
-		System.out.println("To start, you have");
+				+ " same manner input the second element." + "\n" + "\n");
+		GuiMaster.println("To start, you have");
 		game(); //Main game loop 
 	}
 
@@ -45,9 +38,9 @@ public class Alchemy {
 			listElements(); //Prints out the elements you have
 			Scanner scannerS = new Scanner(System.in);
 
-			String element1 = scannerS.nextLine(); //inputs first element
+			String element1 = GuiMaster.getEnteredText();//inputs first element
 			if(elementValidize(element1)){ //checks first and second 
-				String element2 = scannerS.nextLine(); //inputs second element
+				String element2 = GuiMaster.getEnteredText();; //inputs second element
 				if(elementValidize(element2)){
 					int newElementInt = findNewElement(element1, element2);//finds new element's int
 					if(newElementInt != -1){
@@ -56,8 +49,8 @@ public class Alchemy {
 							//then make it discovered.
 							elementsDiscovered[elementsNotNull(elementsDiscovered)] = newElementInt;
 						}
-						System.out.println(element1 + " + " + element2 + " = " + newElement); 
-						System.out.println("The elements you have discovered are, \n");
+						GuiMaster.println(element1 + " + " + element2 + " = " + newElement); 
+						GuiMaster.println("The elements you have discovered are, \n");
 					}
 				}
 			}
@@ -92,20 +85,23 @@ public class Alchemy {
 	}
 
 	private static void listElements(){
+		String stringToPrint = "";
 		for (int x = 0; x <= elementsDiscovered.length-1; x++){ //goes through elementsDiscovered
 			if(elementString(elementsDiscovered[x]) == null){ //finding the string of that postion's
-				System.out.println("."); // int. then prints elements not null
+				stringToPrint += ".";
+				GuiMaster.println(stringToPrint); // int. then prints elements not null
 				break;
 			}
 			else{
-				System.out.print(elementString(elementsDiscovered[x])); // if an element is not null
+				stringToPrint+= elementString(elementsDiscovered[x]); // if an element is not null
 				if(x != elementsDiscovered.length-1){ //then it will print out element. Checks to see 
 					if(elementString(elementsDiscovered[x+1]) != null){ // if it is the last element 
-						System.out.print(", "); // or if the next element is null, if so it prints out
+						stringToPrint+=", "; // or if the next element is null, if so it prints out
 					} // a period. Otherwise a comma is printed out.
 				}
 				else{
-					System.out.println(".");
+					stringToPrint+=".";
+					GuiMaster.println(stringToPrint);
 				}
 			}
 		}
@@ -122,11 +118,11 @@ public class Alchemy {
 	}
 
 	private static void invalidElement(String element) {
-		System.out.println(element +" is an element that does not exist or that you have not "
+		GuiMaster.println(element +" is an element that does not exist or that you have not "
 				+ "discovered yet.");
-		System.out.println("");
-		System.out.println("Please try again.");
-		System.out.println("The elements you have discovered are,\n");
+		GuiMaster.println("");
+		GuiMaster.println("Please try again.");
+		GuiMaster.println("The elements you have discovered are,\n");
 
 	}
 
@@ -147,8 +143,8 @@ public class Alchemy {
 		// above used for debugging
 		String elementString = elementArray[element1Number][element2Number]; //finds the element in
 		if(elementString.equalsIgnoreCase("error")){ //the location those two elements int's map.
-			System.out.println("Nothing can be made with those elements. \n"); //If equals error it 
-			System.out.println("The elements you have discovered are, \n"); // prints some text and 
+			GuiMaster.println("Nothing can be made with those elements. \n"); //If equals error it 
+			GuiMaster.println("The elements you have discovered are, \n"); // prints some text and 
 			return -1; //Java wants me to put a return
 		}
 		else{
