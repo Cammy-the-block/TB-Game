@@ -69,6 +69,7 @@ public class GuiMaster {
 		haveRecivedInput = false;
 		display.setCaretPosition(display.getDocument().getLength());
 	}
+
 	
 	
 	private static class AL implements DocumentListener {

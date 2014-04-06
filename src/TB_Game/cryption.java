@@ -10,7 +10,6 @@ public class cryption {
 
 	public static void encrypt() {
 		String afterShiftOne = "";
-		Scanner scanner = new Scanner(System.in);
 		GuiMaster.println("What do you wish to encrypt?");
 		byte[] inputArray = GuiMaster.getEnteredText().getBytes();
 		GuiMaster.println("How far do you wish to shift it?");
@@ -47,7 +46,6 @@ public class cryption {
 
 	public static void decrypt() {
 		String afterShiftOne = "";
-		Scanner scanner = new Scanner(System.in);
 		GuiMaster.println("What do you wish to decrypt?");
 		byte[] inputArray = GuiMaster.getEnteredText().getBytes();
 		GuiMaster.println("How far do you wish to deshift it?");

@@ -36,7 +36,6 @@ public class Alchemy {
 	private static void game() {
 		while (continueGame) {
 			listElements(); //Prints out the elements you have
-			Scanner scannerS = new Scanner(System.in);
 
 			String element1 = GuiMaster.getEnteredText();//inputs first element
 			if(elementValidize(element1)){ //checks first and second 

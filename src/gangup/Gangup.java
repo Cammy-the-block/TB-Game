@@ -2,13 +2,15 @@ package gangup;
 
 import java.util.Scanner;
 
+import utils.GuiMaster;
+
 public class Gangup {
 
 
 	public static void startGangup() {
 		int playerNumber = 1;
 		int[][] board = new int[8][8];
-		System.out.print("Welcome to TB Game's Gangup. ");
+		GuiMaster.println("Welcome to TB Game's Gangup. \n");
 		board = clearGangupBoard(board);
 		gangupLoop(board);
 	}
@@ -62,12 +64,30 @@ public class Gangup {
 
 	private static int[] inputMove(int[][] board, int playerNumber){
 
-		System.out.print("\n" + "Player #" + playerNumber);
+		GuiMaster.println("Player #" + playerNumber);
 		printGangupBoard(board);
-		Scanner scannerInt = new Scanner(System.in);
-		System.out.print("\n" + "Where do you want to go?" + "\n" + "X Y:");
-		int inputX = scannerInt.nextInt();
-		int inputY = scannerInt.nextInt();
+		GuiMaster.println("Where do you want to go?" + "\n" + "X:");
+		
+		String tempString = GuiMaster.getEnteredText().trim();
+		int inputX;
+		int inputY;
+		
+		if(tempString.matches("[1234567890]*")){
+			inputX = Integer.parseInt(tempString);
+		}
+		else{
+			inputX = -1;
+		}
+		
+		GuiMaster.println("Y:");
+		tempString = GuiMaster.getEnteredText().trim();
+		if(tempString.matches("[1234567890]*")){
+			inputY = Integer.parseInt(tempString);
+		}
+		else{
+			inputY = -1;
+		}
+		
 		int[] inputArray = {inputX, inputY};
 		return inputArray;
 	}
@@ -100,19 +120,19 @@ public class Gangup {
 	private static void printGangupBoard(int[][] board) {
 
 		for (int y = 8; y >= 1; y--) {
-			System.out.println();
-			System.out.print(y + " ");
+			String stringToPrint= y + " ";
 			for (int x = 1; x <= 8; x++) {
-				System.out.print(board[x-1][y-1] + " ");
+				stringToPrint+= board[x-1][y-1] + " ";
 			}
+			GuiMaster.println(stringToPrint);
 		}
-		System.out.println("\n" + " 1 2 3 4 5 6 7 8");
+		GuiMaster.println("\n" + " 1 2 3 4 5 6 7 8");
 	}
 
 
 	private static void invalidMove() {
 
-		System.out.print("Invalid Move");
+		System.out.println("Invalid Move");
 	}
 	private static boolean checkForWin(int turnNumber, int inputX, int inputY, int[][] board,
 			int consecutiveConectionsRequired, int numberOfPlayers){
@@ -203,7 +223,7 @@ public class Gangup {
 	}
 
 	private static void win(int playerNumber) {
-		System.out.println("Good job player #" + playerNumber);
+		GuiMaster.println("Good job player #" + playerNumber);
 
 	}
 
