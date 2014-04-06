@@ -7,27 +7,27 @@ import javax.swing.JOptionPane;
 import utils.TextFileToArray;
 
 public class Alchemy {
-	
-	
-	static boolean game = true;
+
+
+	static boolean continueGame = true;
 	static int totalElements;
 	static int totalStartingElements;
 	//public static String elementArray[][]=
-	      //   Time       Earth     Water       Air          Fire 	    Rock     Rust     Tarnish       Heat     Mud             Tornado        Lava	
-/* Time  *///{{"error",   "Rock",    "Rust",     "Tarnish",   "Heat",   "error", "error", "Weathering", "Marble", "Muddy Slope", "Flying Rock", "error"}, 
-/* Earth *///{"Rock",    "error",   "Mud",      "Tornado",   "Lava",   "Rock",  "error", "Crumbles",   "error",  "error",       "error",       "error" },
-/* Water *///  {"Rust",    "Rock",    "error",    "Hurricane",  "Steam",  "Pool",  "error", "error",      "Steam",  "Mud",         "Water Spout", "Obsidian"},
-/* Air *///    {"Tarnish", "Tornado", "Hurricane", "error",     "Embers", "error", "error", "error",      "Embers", "error",       "Tornado",     "Heat"},
-/* fire*/ //   {"Heat",    "Lava",    "Steam",    "Embers",    "error"}};
-	
-	public static String elementArray[][]; //This array stores all of the elements and how they are 
+	//   Time       Earth     Water       Air          Fire 	    Rock     Rust     Tarnish       Heat     Mud             Tornado        Lava	
+	/* Time  *///{{"error",   "Rock",    "Rust",     "Tarnish",   "Heat",   "error", "error", "Weathering", "Marble", "Muddy Slope", "Flying Rock", "error"}, 
+	/* Earth *///{"Rock",    "error",   "Mud",      "Tornado",   "Lava",   "Rock",  "error", "Crumbles",   "error",  "error",       "error",       "error" },
+	/* Water *///  {"Rust",    "Rock",    "error",    "Hurricane",  "Steam",  "Pool",  "error", "error",      "Steam",  "Mud",         "Water Spout", "Obsidian"},
+	/* Air *///    {"Tarnish", "Tornado", "Hurricane", "error",     "Embers", "error", "error", "error",      "Embers", "error",       "Tornado",     "Heat"},
+	/* fire*/ //   {"Heat",    "Lava",    "Steam",    "Embers",    "error"}};
+
+	private static String elementArray[][]; //This array stores all of the elements and how they are 
 	//formed. Input by reading Elements.txt	
-	public static String elementStringArray[]; //This array stores each element in order. Used to 
+	private static String elementStringArray[]; //This array stores each element in order. Used to 
 	//find element's int and string.
 
-	public static int elementsDiscovered[]; // Stores the elements the
+	private static int elementsDiscovered[]; // Stores the elements the
 	//player has discovered. During setUpArrays it gets filled with starting elements and nothing
-	
+
 	public static void startAlchemy() {	
 		setUpVars(); 
 		System.out.print("\n" + "Welcome to Alchemy!" + "\n" + "\n");
@@ -40,30 +40,31 @@ public class Alchemy {
 		game(); //Main game loop 
 	}
 
-	public static void game() {
-		while (game = true) {
+	private static void game() {
+		while (continueGame) {
 			listElements(); //Prints out the elements you have
 			Scanner scannerS = new Scanner(System.in);
 
 			String element1 = scannerS.nextLine(); //inputs first element
-	        elementValidize(element1); //checks first element, if invalid prints out text then starts
-	        //game function over
-			String element2 = scannerS.nextLine(); //inputs second element
-			elementValidize(element2); //checks second element, if invalid prints out text then starts
-			//game function over
-
-			int newElementInt = findNewElement(element1, element2);//finds new element to be made int
-			String newElement = elementString(newElementInt); //converts new element's int to string
-			if(!checkValid(newElement)){ //Check valid checks if it's been discovered. If it has been 
-				//then make it discovered.
-				elementsDiscovered[elementsNotNull(elementsDiscovered)] = newElementInt;
+			if(elementValidize(element1)){ //checks first and second 
+				String element2 = scannerS.nextLine(); //inputs second element
+				if(elementValidize(element2)){
+					int newElementInt = findNewElement(element1, element2);//finds new element's int
+					if(newElementInt != -1){
+						String newElement = elementString(newElementInt); //converts new element's int to string
+						if(!checkElementDiscovered(newElement)){ //Check valid checks if it's been discovered. If it has been 
+							//then make it discovered.
+							elementsDiscovered[elementsNotNull(elementsDiscovered)] = newElementInt;
+						}
+						System.out.println(element1 + " + " + element2 + " = " + newElement); 
+						System.out.println("The elements you have discovered are, \n");
+					}
+				}
 			}
-			System.out.println(element1 + " + " + element2 + " = " + newElement); 
-			System.out.println("The elements you have discovered are, \n");
 		}
 	}
-	
-	public static void setUpVars(){
+
+	private static void setUpVars(){
 		TextFileToArray tfta = new TextFileToArray(); //Creates new object used to import data
 		tfta.openFile("Elements.txt"); //opens Elements.txt
 		tfta.readFile(); //reads the file
@@ -78,8 +79,8 @@ public class Alchemy {
 		fillArray(elementsDiscovered, totalStartingElements); //calls fillArray which populates 
 		//elementsDiscovered with  starting elements then fills the rest with -1 to represent nothing
 	}
-	
-	public static void fillArray(int[] array,  int actualDataSpots){
+
+	private static void fillArray(int[] array,  int actualDataSpots){
 		for (int x = 0; x <= array.length -1; x++){ //fills in starting elements
 			if(x <= actualDataSpots -1){
 				array[x] = x;
@@ -89,8 +90,8 @@ public class Alchemy {
 			}
 		}
 	}
-	
-	public static void listElements(){
+
+	private static void listElements(){
 		for (int x = 0; x <= elementsDiscovered.length-1; x++){ //goes through elementsDiscovered
 			if(elementString(elementsDiscovered[x]) == null){ //finding the string of that postion's
 				System.out.println("."); // int. then prints elements not null
@@ -110,20 +111,26 @@ public class Alchemy {
 		}
 	}
 
-	public static void elementValidize(String element) {
-		if (!checkValid(element)) { //calls checkValid to check if the element is valid if it isn't it
-			System.out.println(""); //prints out some text then restarts game loop
-			System.out.println("That is an element that"
-					+ " does not exist or that you"
-					+ " have not yet obtained.");
-			System.out.println("");
-			System.out.println("Please try again.");
-			System.out.println("The elements you have discovered are,\n");
-			game();
+	private static boolean elementValidize(String element) {
+		if (!checkElementDiscovered(element)) { //calls checkValid to see if the element is valid if it isn't it
+			invalidElement(element); // then it calls invalidElement to print out an error message
+			return false;
+		}
+		else{
+			return true;
 		}
 	}
-	
-	public static boolean checkValid(String element) {
+
+	private static void invalidElement(String element) {
+		System.out.println(element +" is an element that does not exist or that you have not "
+				+ "discovered yet.");
+		System.out.println("");
+		System.out.println("Please try again.");
+		System.out.println("The elements you have discovered are,\n");
+
+	}
+
+	private static boolean checkElementDiscovered(String element) {
 		for (int x = 0; x <= elementsDiscovered.length -1; x++) { //goes through the elementsDiscovered
 			int elementInt = elementNumber(element); //and checks if the int of the element passed
 			if (elementInt == elementsDiscovered[x]){ //through matches any int in the elementsDiscovered
@@ -133,7 +140,7 @@ public class Alchemy {
 		return false;
 	}
 
-	public static int findNewElement(String element1, String element2) {
+	private static int findNewElement(String element1, String element2) {
 		int element1Number = elementNumber(element1); //finds element number of element1
 		int element2Number = elementNumber(element2); //and element2
 		//System.out.println(element1 + " " + element2 + " " + element1Number + " " + element2Number);
@@ -142,7 +149,6 @@ public class Alchemy {
 		if(elementString.equalsIgnoreCase("error")){ //the location those two elements int's map.
 			System.out.println("Nothing can be made with those elements. \n"); //If equals error it 
 			System.out.println("The elements you have discovered are, \n"); // prints some text and 
-			game(); // restarts game loop.
 			return -1; //Java wants me to put a return
 		}
 		else{
@@ -151,7 +157,7 @@ public class Alchemy {
 		}
 	}
 
-	public static int elementNumber(String element) { //locates the element in elementStringArray and
+	private static int elementNumber(String element) { //locates the element in elementStringArray and
 		for (int x = 0; x <= elementStringArray.length -1; x++) { //returns the string's int / 
 			if (elementStringArray[x].equalsIgnoreCase(element)) { //the location of the string in the
 				return x; //array
@@ -159,8 +165,8 @@ public class Alchemy {
 		}
 		return -2; //if not in there it returns -2
 	}
-	
-	public static String elementString(int elementInt){ 
+
+	private static String elementString(int elementInt){ 
 		if (elementInt == -1){ //-1 equals nothing so it returns null
 			return null;
 		}
@@ -169,8 +175,8 @@ public class Alchemy {
 			return elementString; //in that location in elementStringArray
 		}
 	}
-	
-	public static int elementsNotNull(int[] array){
+
+	private static int elementsNotNull(int[] array){
 		int elementsNotNull = 0; 
 		for (int x = 0; x <= array.length-1; x++){ //searches through the array
 			if (elementString(array[x]) != null){ //check the elements that are not null / int is not
