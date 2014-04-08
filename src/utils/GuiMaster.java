@@ -57,7 +57,12 @@ public class GuiMaster {
 	
 	public static String getEnteredText(){
 		while(!haveRecivedInput){
-			
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		haveRecivedInput = false;
 		display.setCaretPosition(display.getDocument().getLength());
