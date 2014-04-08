@@ -23,14 +23,16 @@ public class Alchemy {
 	//player has discovered. During setUpArrays it gets filled with starting elements and nothing
 
 	public static void startAlchemy() {	
-		setUpVars(); 
-		GuiMaster.println("\n" + "Welcome to Alchemy!" + "\n" + "\n" 
-				+ "Instructions: To start, input the "
-				+ "first element that you would like to"
-				+ " mix and press \"Enter\" and then in the"
-				+ " same manner input the second element." + "\n" + "\n");
-		GuiMaster.println("To start, you have");
-		game(); //Main game loop 
+		if(setUpVars()){ //Sets up variables, and if successful,
+			GuiMaster.println("\n" + "Welcome to Alchemy!" + "\n" + "\n" //print out a message,
+					+ "Instructions: To start, input the "
+					+ "first element that you would like to"
+					+ " mix and press \"Enter\" and then in the"
+					+ " same manner input the second element." + "\n" + "\n");
+			GuiMaster.println("To start, you have"); //then,
+			game(); //start the main game loop.
+		}
+		//if unsuccessful the program returns to the menu
 	}
 
 	private static void game() {
@@ -56,20 +58,23 @@ public class Alchemy {
 		}
 	}
 
-	private static void setUpVars(){
+	private static boolean setUpVars(){
 		TextFileToArray tfta = new TextFileToArray(); //Creates new object used to import data
-		tfta.openFile("Elements.txt"); //opens Elements.txt
-		tfta.readFile(); //reads the file
-		tfta.closeFile(); //closes file to prevent resource leak
-		elementArray = tfta.returnElementListArray(); //populates elementaArray from data import from 
-		//file earlier
-		elementStringArray= tfta.returnElementStringArray(); // populates elementStringArray from data
-		//import form file earlier
-		totalElements = tfta.returnTotalElements();
-		totalStartingElements = tfta.returnTotalStartingElements();
-		elementsDiscovered = new int[totalElements];
-		fillArray(elementsDiscovered, totalStartingElements); //calls fillArray which populates 
-		//elementsDiscovered with  starting elements then fills the rest with -1 to represent nothing
+		if(tfta.openFile("/Elements.txt", "Elements.txt")){ // if opening Elements.txt is successful
+			tfta.readFile(); //reads the file
+			tfta.closeFile(); //closes file to prevent resource leak
+			elementArray = tfta.returnElementListArray(); //populates elementaArray from data import from 
+			//file earlier
+			elementStringArray= tfta.returnElementStringArray(); // populates elementStringArray from data
+			//import form file earlier
+			totalElements = tfta.returnTotalElements();
+			totalStartingElements = tfta.returnTotalStartingElements();
+			elementsDiscovered = new int[totalElements];
+			fillArray(elementsDiscovered, totalStartingElements); //calls fillArray which populates 
+			//elementsDiscovered with  starting elements then fills the rest with -1 to represent nothing
+			return true; //returns true because reading the file was successful 
+		}
+		return false; //failed reading file so returns false
 	}
 
 	private static void fillArray(int[] array,  int actualDataSpots){

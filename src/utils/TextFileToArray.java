@@ -1,7 +1,11 @@
 package utils;
 
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 public class TextFileToArray {
 
@@ -11,11 +15,19 @@ public class TextFileToArray {
 	private static String elementListArray[][];
 	private static String elementStringArray[];
 
-	public void openFile(String file) {
-		try {
-			scanner = new Scanner(new File(file));
-		} catch (Exception e) {
-			System.out.println("WARNING: The elements.txt cannot be found.");
+	public boolean openFile(String file, String fileIde) { 
+		try { //it tries using the method used to read from a jar
+			scanner = new Scanner(TextFileToArray.class.getResourceAsStream(file));
+			return true;
+		} catch (Exception e1) { //if that fails, it tries to use the 
+			try { //method to read from the IDE
+				scanner = new Scanner(new File(fileIde)); 
+				return true;
+			}
+			catch (Exception e2) {	//if it fails it prints out an error
+				GuiMaster.println("WARNING: The file Elements.txt cannot be found.");
+				return false; // and returns to alchemy, which eventually 
+			} //returns to main menu
 		}
 	}
 
